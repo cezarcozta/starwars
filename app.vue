@@ -1,27 +1,52 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <div>
-      <h1>HELLO WORLD</h1>
-      <button @click="showAlert">TESTE</button>
-      <button @click="showAlert2">Clique-me</button>
+  <div class="home">
+    <h2>Filmes da Saga Star Wars</h2>
+    <div class="movie-list">
+      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import MovieCard from '~/components/MovieCard.vue';
+
 export default {
-  methods: {
-    showAlert() {
-      alert("Botão clicado!"); // Mensagem do alerta
-   
-   },
-   showAlert2() {
-      alert("ESTOU CLICADO");
-    },
+  components: {
+    MovieCard
   },
+  data() {
+    return {
+      movies: []
+    };
+  },
+  async mounted() {
+    try {
+      const response = await axios.get('https://swapi.dev/api/films/');
+      this.movies = response.data.results.map((movie, index) => ({
+        ...movie,
+        id: index + 1 // Adiciona o ID do filme para navegação
+      }));
+    } catch (error) {
+      console.error("Erro ao carregar filmes", error);
+    }
+  }
 };
 </script>
+
+<style scoped>
+.home {
+  max-width: 920px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+</style>
 
 
 

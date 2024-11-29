@@ -1,0 +1,30 @@
+body {
+    background-color: #161616;
+    color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #ffcc02;
+  }
+  
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  button {
+    background-color: #ffcc02;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ffb800;
+  }
