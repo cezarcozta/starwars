@@ -22,12 +22,16 @@ export default {
       character: {}
     };
   },
-  async asyncData({ params }) {
-    const characterId = params.id;
-    const response = await axios.get(`https://swapi.dev/api/people/${characterId}/`);
-    return {
-      character: response.data
-    };
+  async mounted() {
+    try {
+      const response = await axios.get(`https://swapi.dev/api/films/${characterId}`);
+      this.movies = response.characters.map((movie, index) => ({
+        ...movie,
+        id: index + 1 // Adiciona o ID do filme para navegação
+      }));
+    } catch (error) {
+      console.error("Erro ao carregar filmes", error);
+    }
   }
 };
 </script>
